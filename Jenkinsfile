@@ -8,12 +8,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/ajazjamadar/Employee-Management-System.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -22,7 +16,7 @@ pipeline {
 
         stage('Archive') {
             steps {
-                archiveArtifacts artifacts: 'target/*.*', fingerprint: true
+                archiveArtifacts artifacts: 'target/*.war', fingerprint: true
             }
         }
 
@@ -36,7 +30,6 @@ pipeline {
     }
 
     post {
-
         success {
             echo 'Deployment Successful'
         }
